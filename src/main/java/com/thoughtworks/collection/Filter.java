@@ -21,6 +21,6 @@ public class Filter {
     }
 
     public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
-        throw new NotImplementedException();
+        return firstList.stream().filter(secondList::contains).collect(Collectors.toList());
     }
 }
