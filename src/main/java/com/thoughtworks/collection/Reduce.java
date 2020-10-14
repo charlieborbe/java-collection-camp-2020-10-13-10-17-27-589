@@ -1,6 +1,7 @@
 package com.thoughtworks.collection;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reduce {
 
@@ -11,9 +12,8 @@ public class Reduce {
     }
 
     public double getAverage() {
-        double average = arrayList.stream().mapToInt(number -> number).average().getAsDouble();
-//        double average2 = arrayList.stream().reduce((total, currentValue) -> total + currentValue).orElse(0) / arrayList.size();
-        return average;
+        List<Double> numbers = arrayList.stream().map(Double::valueOf).collect(Collectors.toList());
+        return numbers.stream().reduce((numberA, numberB) -> numberA + numberB).map(total -> total / arrayList.size()).get().doubleValue();
     }
 
     public int getMaxValue() {
@@ -21,6 +21,6 @@ public class Reduce {
     }
 
     public int getLastOdd() {
-        return arrayList.stream().filter(number -> number % 2 == 1).reduce((a, b) -> b).get().intValue();
+        return arrayList.stream().filter(number -> number % 2 == 1).reduce((numberA, numberB) -> numberB).get().intValue();
     }
 }
