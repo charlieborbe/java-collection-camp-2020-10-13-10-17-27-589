@@ -1,10 +1,5 @@
 package com.thoughtworks.collection;
 
-import org.apache.commons.lang3.NotImplementedException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class Reduce {
@@ -16,7 +11,9 @@ public class Reduce {
     }
 
     public double getAverage() {
-        return arrayList.stream().reduce((total, currentValue) -> total + currentValue).orElse(0) / arrayList.size();
+        double average = arrayList.stream().mapToInt(number -> number).average().getAsDouble();
+//        double average2 = arrayList.stream().reduce((total, currentValue) -> total + currentValue).orElse(0) / arrayList.size();
+        return average;
     }
 
     public int getMaxValue() {
@@ -24,6 +21,6 @@ public class Reduce {
     }
 
     public int getLastOdd() {
-        throw new NotImplementedException();
+        return arrayList.stream().filter(number -> number % 2 == 1).reduce((a, b) -> b).get().intValue();
     }
 }
